@@ -1,0 +1,333 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="ASP_Net_MicroProject.Admin" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+   
+    <style>
+         
+        .sidebar {
+            width: 300px;
+            height: 100%;
+            background: #2c3e50;
+            color: white;
+            padding-top: 30px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            position:relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width:100%;
+            cursor: pointer;
+            transition: 0.3s;
+            overflow:hidden;
+        }
+        .sidebar ul li:hover {
+/*            background: #34495e;*/
+            color: magenta;
+            font-size:larger;
+            padding-left:30px;
+
+        }
+        .sidebar ul li:hover i {
+            color:  magenta;
+            left:4rem;
+            width:30px;
+            transition: all 0.2s ease;
+        }
+
+       .sidebar ul li:hover::before {
+           content: '';
+           height: 100%;
+           background-color: magenta;
+           z-index:999;
+       }
+       .sidebar ul li:hover::after {
+            content: '';
+            width: .5rem;
+            height: 100%;
+            background-color:  magenta;
+            z-index:999;
+            position:absolute;
+            border-radius:10%;
+       }
+
+        .sidebar ul li i {
+            width: 15px;
+            position:absolute;
+            left:1.5rem;
+        }
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+        table{
+            width: 100%;
+            height:100%;
+            border : none;
+        }
+
+        /* Sidebar Profile Section Start */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-left : 30px;
+            margin-bottom: 10px;
+            background-color: #2c3e50;
+            padding: 5px;
+            border-radius: 8px;
+            max-width: 250px;
+        }
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid white;
+        }
+        .user-info {
+            color: white;
+        }
+        .user-info .username {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .online-status {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #4CAF50;
+        }
+        .online-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #4CAF50;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .dash{
+            width: 100%;
+            height: 5px;
+            background-color: darkmagenta;
+        }
+        /* Sidebar Profile Section End */
+
+        /* Top Bar Styling */
+        .top-bar {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .top-bar span {
+            padding-left: 250px;
+        }
+        .top-bar a {
+            text-decoration: none;
+            color: inherit;
+        }
+        /* Logo Styling */
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .navbar-brand span {
+            color: #28a745;
+        }
+        .sidebar_btn{
+            border:none;
+            background:#2c3e50;
+            color: white;
+            width:100%;
+            padding: 15px;
+            padding-left : 60px;
+            text-align:left;
+            
+        }
+        .sidebar_btn:hover{
+/*            background: #34495e;*/
+        }
+        .panellogo{
+            padding-left: 90px;
+        }
+        .dash{
+            width: 100%;
+            height: 5px;
+            background-color: darkmagenta;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table border="1">
+            <tr>
+                <td colspan="2">
+                    <!-- Top Bar -->
+                    <div class="top-bar text-center"> Welcome to <strong>SkillPort</strong>, we hope you will enjoy our Courses and have a good experience
+                        <span>
+                            <a href="mailto:info@example.com">Email: skillport@gmail.com</a> | Call: +96 8925 1970
+                        </span>
+                    </div>
+                    <!-- Navbar -->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+                        <div class="container">
+                            <a class="navbar-brand" href="#"><span>Skill</span>Port</a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ms-auto">
+                                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Courses</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-search"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                      </nav>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="sidebar">
+                        <div class="user-profile">
+                            <img src="./images/user_icon.jpg" alt="User Profile">
+                            <div class="user-info">
+                                <asp:Label ID="User_name" runat="server" CssClass="username" Text="Prajwal Thorat"></asp:Label>
+                                <div class="online-status">
+                                    <div class="online-dot"></div>
+                                    <asp:Label ID="online" runat="server" Text="Online"></asp:Label>
+                                </div>
+                            </div>
+                        </div>
+                        <ul>                                                 
+                            <li>
+                                <span class="dash"></span>
+                            </li>
+                            
+                            <li>
+                                <i class="fas fa-plus-circle"></i>
+                                <asp:Button ID="Button9" CssClass="sidebar_btn" runat="server" Text="Home" OnClick="Button9_Click" />
+                            </li>
+
+                            <li>
+                                <i class="fas fa-plus-circle"></i>
+                                <asp:Button ID="Button1" CssClass="sidebar_btn" runat="server" Text="Add New Courses" OnClick="Button1_Click" />
+                            </li>
+                            <li>
+                                <i class="fas fa-trash"></i> 
+                                <asp:Button ID="Button3" CssClass="sidebar_btn" runat="server" Text="Edit/Remove Courses" OnClick="Button3_Click" />
+                            </li>
+                            <li >
+                                <i class="fas fa-book"></i> 
+                                <asp:Button ID="Button4" CssClass="sidebar_btn" runat="server" Text="View Courses" OnClick="Button4_Click" />
+                            </li>
+                            <li>
+                                <i class="fas fa-credit-card"></i> 
+                                <asp:Button ID="Button5" CssClass="sidebar_btn" runat="server" Text="View Payment History" OnClick="Button5_Click" />
+                            </li>
+                            <li>
+                                <i class="fas fa-users"></i> 
+                                <asp:Button ID="Button6" CssClass="sidebar_btn" runat="server" Text="View User Details" OnClick="Button6_Click" />
+                            </li>
+                            <li>
+                                <i class="fas fa-user"></i> 
+                                <asp:Button ID="Button7" CssClass="sidebar_btn" runat="server" Text="Profile Edit" OnClick="Button7_Click" />
+                            </li>
+                            <li>
+                                <i class="fas fa-sign-out-alt"></i>
+                                <asp:Button ID="Button8" CssClass="sidebar_btn" runat="server" Text="Logout" OnClick="Button8_Click" />
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                      <footer class="bg-dark text-white pt-5 pb-3 f_box">
+                        <div class="container">
+                          <div class="row">
+                            <!-- Company Info -->
+                            <div class="col-md-3">
+                              <h4 class="text-success">SkillPort</h4>
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac honcus risus atiner Pellentesque risus.
+                              </p>
+                              <ul class="list-unstyled">
+                                <li><i class="bi bi-geo-alt-fill"></i> Dindori Road, Nashik</li>
+                                <li><i class="bi bi-envelope-fill"></i> SkillPort123@gmail.com</li>
+                                <li><i class="bi bi-telephone-fill"></i> +96 8925 1970</li>
+                              </ul>
+                            </div>
+
+                            <!-- Quick Links -->
+                            <div class="col-md-2 text-center">
+                              <h5>Quick Link</h5>
+                              <ul class="list-unstyled">
+                                <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">About</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">Courses</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">Guide</a></li>
+                              </ul>
+                            </div>
+
+
+                            <!-- Pricing -->
+                            <div class="col-md-2 text-center">
+                              <h5>Pricing</h5>
+                              <ul class="list-unstyled">
+                                <li><a href="#" class="text-white text-decoration-none">Overview</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">Premium Plans</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">Monthly Plans</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">Offers</a></li>
+                              </ul>
+                            </div>
+
+                            <!-- Pricing -->
+                            <div class="col-md-3 text-center">
+                              <h5>Latest Courses</h5>
+                              <ul class="list-unstyled">
+                                <li><a href="#" class="text-white text-decoration-none">Java Full stack</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">.Net Full stack</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">Software Testing</a></li>
+                                <li><a href="#" class="text-white text-decoration-none">MERN stack</a></li>
+                              </ul>
+                            </div>
+
+                            <!-- Stay Connected -->
+                            <div class="col-md-2">
+                              <h5>Stay Connected</h5>
+                              <ul class="list-unstyled">
+                                <li><a href="#" class="text-white text-decoration-none"><i class="bi bi-facebook"></i> Facebook</a></li>
+                                <li><a href="#" class="text-white text-decoration-none"><i class="bi bi-twitter"></i> Twitter</a></li>
+                                <li><a href="#" class="text-white text-decoration-none"><i class="bi bi-pinterest"></i> Pinterest</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </footer>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
